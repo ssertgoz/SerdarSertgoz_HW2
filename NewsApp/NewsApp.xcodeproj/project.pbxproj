@@ -13,6 +13,8 @@
 		758B31612A11BADC00DABAC8 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 758B315F2A11BADC00DABAC8 /* NewsApp.xcdatamodeld */; };
 		758B31632A11BADD00DABAC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 758B31622A11BADD00DABAC8 /* Assets.xcassets */; };
 		758B31662A11BADD00DABAC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 758B31642A11BADD00DABAC8 /* LaunchScreen.storyboard */; };
+		758B31722A143C9C00DABAC8 /* UICollectionView+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B31712A143C9C00DABAC8 /* UICollectionView+Extansion.swift */; };
+		758B31742A143D0900DABAC8 /* UICollectionViewCell+Extansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B31732A143D0900DABAC8 /* UICollectionViewCell+Extansion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		758B31652A11BADD00DABAC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		758B31672A11BADD00DABAC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		758B316F2A11BC3000DABAC8 /* NewsAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NewsAPI; path = NewsApp/NewsAPI; sourceTree = "<group>"; };
+		758B31712A143C9C00DABAC8 /* UICollectionView+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extansion.swift"; sourceTree = "<group>"; };
+		758B31732A143D0900DABAC8 /* UICollectionViewCell+Extansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extansion.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		758B31552A11BADC00DABAC8 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				758B31702A143C4E00DABAC8 /* Extensions */,
 				758B31562A11BADC00DABAC8 /* AppDelegate.swift */,
 				758B31582A11BADC00DABAC8 /* SceneDelegate.swift */,
 				758B315C2A11BADC00DABAC8 /* Main.storyboard */,
@@ -67,6 +72,15 @@
 				758B315F2A11BADC00DABAC8 /* NewsApp.xcdatamodeld */,
 			);
 			path = NewsApp;
+			sourceTree = "<group>";
+		};
+		758B31702A143C4E00DABAC8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				758B31712A143C9C00DABAC8 /* UICollectionView+Extansion.swift */,
+				758B31732A143D0900DABAC8 /* UICollectionViewCell+Extansion.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,8 +154,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				758B31722A143C9C00DABAC8 /* UICollectionView+Extansion.swift in Sources */,
 				758B31572A11BADC00DABAC8 /* AppDelegate.swift in Sources */,
 				758B31612A11BADC00DABAC8 /* NewsApp.xcdatamodeld in Sources */,
+				758B31742A143D0900DABAC8 /* UICollectionViewCell+Extansion.swift in Sources */,
 				758B31592A11BADC00DABAC8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
