@@ -20,7 +20,7 @@ class LoadingView {
     func configure() {
         blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         blurView.translatesAutoresizingMaskIntoConstraints = false
-        blurView.frame = UIWindow(frame: UIScreen.main.bounds).frame
+        blurView.frame = UIApplication.shared.windows.first?.frame ?? CGRect.zero
         activityIndicator.center = blurView.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = .large
@@ -36,6 +36,14 @@ class LoadingView {
     func hideLoading() {
         blurView.removeFromSuperview()
         activityIndicator.stopAnimating()
+    }
+    
+    func handleOrientationChange() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            guard let window = UIApplication.shared.windows.first else { return }
+            self.blurView.frame = window.frame
+            self.activityIndicator.center = self.blurView.center
+        }
     }
     
 }

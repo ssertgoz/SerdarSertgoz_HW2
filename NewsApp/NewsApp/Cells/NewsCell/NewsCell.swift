@@ -23,7 +23,7 @@ class NewsCell: UICollectionViewCell {
     func configure(news: News) {
         preparePosterImage(with: news.multimedia?[1].url ?? "")
         title.text = news.title
-        des.text = news.abstract
+        des.text = news.byline
     }
     
     private func preparePosterImage(with urlString: String?) {

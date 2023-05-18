@@ -79,6 +79,7 @@ final class HomeViewController: UIViewController, LoadingShowable {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
+        LoadingView.shared.handleOrientationChange()
     }
     func filterNewsList(_ newsList: [News]) -> [News] {
         return newsList.filter { news in
