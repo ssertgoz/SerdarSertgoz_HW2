@@ -18,6 +18,11 @@ extension HomeViewModel {
         static let cellRightPadding: Double = 10
         static let cellTopPadding: Double = 10
         static let cellBottomPadding: Double = 10
+        static let navigationBarTitle: String = "The New York Times"
+    }
+    
+    fileprivate enum SequeIdentifiers {
+        static let homeToDetails: String = "Details"
     }
 }
 
@@ -33,13 +38,15 @@ protocol HomeViewModelProtocol{
     func calculateSectionCellSize(_ index: Int) -> (width: Double, height: Double)
     var heightOfNewsCell: Double { get }
     var cellPaddings: (top: Double, left: Double, bottom: Double, right: Double) { get }
+    var navigationBarTitle: String { get }
+    var homeToDetailsSegue: String { get }
 }
 
 
 protocol HomeViewModelDelegate: AnyObject {
     func showLoadingView()
     func hideLoadingView()
-    func reloadData()  //MARK: do it for both section and normal collection view
+    func reloadData()
 }
 
 
@@ -58,20 +65,20 @@ final class HomeViewModel{
     
     fileprivate func fetchNews(_ index: Int) {
         self.delegate?.showLoadingView()
-       
-       service.fetchTopNews(section: sectionAt(index) ?? SectionAPIURL.home ) { [weak self] response in
-           guard let self else { return }
-           self.delegate?.hideLoadingView()
-           switch response {
-           case .success(let news):
-               self.newsList = self.filterNewsList(news)
-               self.selectedSection = self.sectionAt(index) ?? SectionAPIURL.home
-               self.delegate?.reloadData()
-           case .failure(let error):
-               print("Serdar: \(error)")
-           }
-       }
-   }
+        
+        service.fetchTopNews(section: sectionAt(index) ?? SectionAPIURL.home ) { [weak self] response in
+            guard let self else { return }
+            self.delegate?.hideLoadingView()
+            switch response {
+            case .success(let news):
+                self.newsList = self.filterNewsList(news)
+                self.selectedSection = self.sectionAt(index) ?? SectionAPIURL.home
+                self.delegate?.reloadData()
+            case .failure(let error):
+                print("ERROR: \(error)")
+            }
+        }
+    }
     
     
     fileprivate func filterNewsList(_ newsList: [News]) -> [News] {
@@ -84,10 +91,18 @@ final class HomeViewModel{
             }
         }
     }
-
+    
 }
 
 extension HomeViewModel: HomeViewModelProtocol{
+    var homeToDetailsSegue: String {
+        SequeIdentifiers.homeToDetails
+    }
+    
+    var navigationBarTitle: String {
+        Constants.navigationBarTitle
+    }
+    
     var cellPaddings: (top: Double, left: Double, bottom: Double, right: Double) {
         return (top: Constants.cellTopPadding, left: Constants.cellLeftPadding, bottom: Constants.cellBottomPadding, right: Constants.cellRightPadding)
     }

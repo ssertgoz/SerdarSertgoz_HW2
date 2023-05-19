@@ -26,6 +26,7 @@
 		75A893452A157B6500556F80 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A893442A157B6500556F80 /* MoreViewController.swift */; };
 		75B0D3802A15068100341154 /* SectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0D37E2A15068100341154 /* SectionCell.swift */; };
 		75B0D3812A15068100341154 /* SectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75B0D37F2A15068100341154 /* SectionCell.xib */; };
+		75B436C92A16E6E1001F76F3 /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B436C82A16E6E1001F76F3 /* MoreViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		75A893442A157B6500556F80 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		75B0D37E2A15068100341154 /* SectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCell.swift; sourceTree = "<group>"; };
 		75B0D37F2A15068100341154 /* SectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionCell.xib; sourceTree = "<group>"; };
+		75B436C82A16E6E1001F76F3 /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				7594516C2A16B37B004E5A7D /* Scenes */,
-				759482B42A147BDE00E87714 /* Controllers */,
 				7594829F2A14489D00E87714 /* Cells */,
 				7594829C2A1446E500E87714 /* Utils */,
 				759482992A1445CC00E87714 /* Views */,
@@ -114,6 +115,7 @@
 		7594516C2A16B37B004E5A7D /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				759482B42A147BDE00E87714 /* Controllers */,
 				7594516D2A16B39B004E5A7D /* ViewModels */,
 			);
 			path = Scenes;
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				7594516E2A16B504004E5A7D /* HomeViewModel.swift */,
+				75B436C82A16E6E1001F76F3 /* MoreViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				758B31722A143C9C00DABAC8 /* UICollectionView+Extansion.swift in Sources */,
 				758B31572A11BADC00DABAC8 /* AppDelegate.swift in Sources */,
 				7594829E2A14470600E87714 /* LoadingShowable.swift in Sources */,
+				75B436C92A16E6E1001F76F3 /* MoreViewModel.swift in Sources */,
 				7594516F2A16B504004E5A7D /* HomeViewModel.swift in Sources */,
 				758B31612A11BADC00DABAC8 /* NewsApp.xcdatamodeld in Sources */,
 				758B31742A143D0900DABAC8 /* UICollectionViewCell+Extansion.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  NewsApp
 //
 //  Created by serdar on 17.05.2023.
@@ -9,7 +9,7 @@ import UIKit
 
 
 final class HomeViewController: UIViewController, LoadingShowable {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sectionsCollectionView: UICollectionView!
     
@@ -21,44 +21,34 @@ final class HomeViewController: UIViewController, LoadingShowable {
     var date: String?
     var writerName: String?
     
-    
     var homeViewModel: HomeViewModelProtocol!{
         didSet {
             homeViewModel.delegate = self
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeViewModel.fetchNewsData(0)
-        sectionsCollectionView.register(cellType: SectionCell.self)
-        collectionView.register(cellType: NewsCell.self)
         configure()
     }
     
     func configure(){
-        // Başlık metni
-        self.title = "The New York Times"
+        self.title = homeViewModel.navigationBarTitle
+        homeViewModel.fetchNewsData(0)
+        sectionsCollectionView.register(cellType: SectionCell.self)
+        collectionView.register(cellType: NewsCell.self)
     }
     
-         
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
         LoadingView.shared.handleOrientationChange()
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "Details" {
-            
-        }
-        return true
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Details" {
+        if segue.identifier == homeViewModel.homeToDetailsSegue {
             if let destinationVC = segue.destination as? MoreViewController {
+                destinationVC.moreViewModel = MoreViewModel()
                 destinationVC.titleString = self.titleString
                 destinationVC.writerName =  self.writerName
                 destinationVC.date =        self.date
@@ -66,40 +56,36 @@ final class HomeViewController: UIViewController, LoadingShowable {
                 destinationVC.imageURL =    self.imageURL
                 destinationVC.readMoreURL = self.readMoreURL
             }
-           
         }
     }
-
 }
 
 extension HomeViewController: UICollectionViewDataSource {
-   
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.collectionView {
             return homeViewModel.numberOfNewsItem
-        } else if collectionView == self.sectionsCollectionView {
+        } else {
             return homeViewModel.numberOfSectionsItem
         }
-        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = UICollectionViewCell()
-
+        
         if collectionView == self.collectionView {
+            let cell = collectionView.dequeCell(cellType: NewsCell.self, indexPath: indexPath)
+            
             if let news = self.homeViewModel.newsAt(indexPath.row){
-                let cell = collectionView.dequeCell(cellType: NewsCell.self, indexPath: indexPath)
                 cell.configure(news: news)
                 cell.layer.cornerRadius = 8
                 cell.layer.masksToBounds = true
-                return cell
             }
-            
-        } else if collectionView == self.sectionsCollectionView {
+            return cell
+        } else{
+            let cell = collectionView.dequeCell(cellType: SectionCell.self, indexPath: indexPath)
             
             if let section = self.homeViewModel.sectionAt(indexPath.row){
-                let cell = collectionView.dequeCell(cellType: SectionCell.self, indexPath: indexPath)
-                cell.configure(section: section)
+                cell.configure(sectionName: section.rawValue)
                 if(section == homeViewModel.selectedSectionItem){
                     cell.title.textColor = .black
                     cell.contentView.backgroundColor = .systemYellow
@@ -107,17 +93,11 @@ extension HomeViewController: UICollectionViewDataSource {
                     cell.title.textColor = .white
                     cell.contentView.backgroundColor = .lightGray
                 }
-                
                 cell.layer.cornerRadius = 8
                 cell.layer.masksToBounds = true
-                return cell
             }
-            
-            
+            return cell
         }
-        
-        
-        return cell
     }
 }
 
@@ -140,26 +120,20 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
             bottom: homeViewModel.cellPaddings.bottom,
             right: homeViewModel.cellPaddings.right
         )
-        
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.collectionView {
             let news = homeViewModel.newsAt(indexPath.row)
-            let originalString = (news?.publishedDate ?? "" ) as String
-            let substring = originalString.prefix(10)
-            self.date = String(substring)
+            self.date = String(((news?.publishedDate ?? "" ) as String).prefix(10))
             self.titleString = news?.title
             self.writerName = news?.byline
-            
             self.desc = news?.abstract
             self.imageURL = news?.multimedia?[1].url ?? ""
             self.readMoreURL = news?.url
-            performSegue(withIdentifier: "Details", sender: indexPath)
-            
-        } else if collectionView == self.sectionsCollectionView {
+            performSegue(withIdentifier: homeViewModel.homeToDetailsSegue, sender: indexPath)
+        } else{
             homeViewModel.fetchNewsData(indexPath.row)
         }
-        
     }
 }
 
@@ -178,6 +152,4 @@ extension HomeViewController: HomeViewModelDelegate{
         let indexPath = IndexPath(item: 0, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
     }
-    
-    
 }

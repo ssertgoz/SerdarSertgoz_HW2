@@ -10,15 +10,10 @@ import NewsAPI
 import SDWebImage
 
 class NewsCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var des: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
     
     func configure(news: News) {
         preparePosterImage(with: news.multimedia?[1].url ?? "")
@@ -33,5 +28,4 @@ class NewsCell: UICollectionViewCell {
             image.sd_setImage(with: url)
         }
     }
-
 }
