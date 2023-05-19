@@ -48,6 +48,8 @@ Upon launching the app, you will be presented with a list of top news articles f
 ![Screenshot 1](screenshots/screenshot_1.png)
 ![Screenshot 2](screenshots/screenshot_2.png)
 ![Screenshot 1](screenshots/screenshot_3.png)
+![Screenshot 2](screenshots/screenshot_4.png)
+![Screenshot 1](screenshots/screenshot_5.png)
 
 ## Demo Video
 
