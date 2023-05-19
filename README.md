@@ -51,7 +51,7 @@ Upon launching the app, you will be presented with a list of top news articles f
 
 ## Demo Video
 
-[![Demo Video](screenshots/demo_gif.gif)
+![Demo Video](screenshots/demo_gif.gif)
 
 ## Contributing
 
